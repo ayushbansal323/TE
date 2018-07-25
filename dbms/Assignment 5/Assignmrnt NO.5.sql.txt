@@ -1,0 +1,1 @@
+create table students(Roll_NO number(20) primary key,attendence number(20) not null,status VARCHAR(4));
