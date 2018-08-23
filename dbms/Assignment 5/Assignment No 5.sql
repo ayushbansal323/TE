@@ -95,16 +95,32 @@ new   8: accno:=1;
 dance8800
 cannot withdraw = 100000
 
-PL/SQL procedure successfully completed.
+PL/SQL procedure successfully completed..
 */
 
+CREATE TABLE ACCOUNT(ACC_NO NUMBER(10),BALANCE NUMBER(10),STATUS VARCHAR(10));
 
+INSERT INTO ACCOUNT (ACC_NO,BALANCE) values (1,-111);
+INSERT INTO ACCOUNT (ACC_NO,BALANCE) values (2,20000);
+INSERT INTO ACCOUNT (ACC_NO,BALANCE) values (3,-300);
+INSERT INTO ACCOUNT (ACC_NO,BALANCE) values (4,40000);
+INSERT INTO ACCOUNT (ACC_NO,BALANCE) values (5,50000);
 
-
-
-
-
-
-
-
-
+DECLARE
+accno number(10);
+bal number(10);
+BR exception ;
+begin
+accno:=&accno;
+SELECT BALANCE into bal from ACCOUNT where ACC_NO=accno;
+IF (bal < 0) THEN
+	raise BR;
+ELSE
+	dbms_output.put_line('business rule not voileted BALANCE'||bal);
+END IF;
+EXCEPTION 
+WHEN BR THEN
+	dbms_output.put_line('business rule  voileted BALANCE '||bal);
+WHEN NO_DATA_FOUND THEN
+	dbms_output.put_line('accno does not exist');
+END;
