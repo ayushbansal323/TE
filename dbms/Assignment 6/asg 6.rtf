@@ -1,0 +1,251 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang2057\deflangfe2057{\fonttbl{\f0\fswiss\fprq2\fcharset0 Calibri;}}
+{\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\nowidctlpar\sa200\sl276\slmult1\lang9\b\f0\fs22\par
+\tab\tab\tab\tab\tab Assignment No-6\par
+\par
+Problem Statement 1: \b0\par
+\b The bank manager has decided to activate all those accounts which were previously marked       as inactive for performing no transaction in last 365 days. Write a PL/SQ block (using implicit    cursor) to update the status of account, display an approximate message based on the no. Of    rows affected by the update. (Use of %FOUND, %NOTFOUND, %ROWCOUNT)\b0\par
+SQL> create table bankcursor1(acc_no number(10),status varchar(10));\par
+Table created.\par
+SQL> insert into  bankcursor1  values(1,"inactive");\par
+1 row created.\par
+SQL> insert into  bankcursor1 values(2,"active");\par
+1 row created.\par
+SQL> insert into  bankcursor1 values(3,"active");\par
+1 row created.\par
+SQL> insert into  bankcursor1  values(4,"inactive");\par
+1 row created.\par
+SQL> select * from bankcursor1;\par
+ACC_NO STATUS\par
+---------- ----------\par
+1 \tab inactive\par
+2 \tab active\par
+3 \tab active\par
+4 \tab inactive\par
+SQL> set serveroutput on;\par
+SQL> declare\par
+  2  rows_a number(10);\par
+  3  begin\par
+  4  update bankcursor1 set status='active'where status='inactive';\par
+  5  rows_a:=(SQL%rowcount);\par
+  6  dbms_output.put_line(rows_a||'rows are affected');\par
+  7  end;\par
+  8  /\par
+2rows are affected\par
+PL/SQL procedure successfully completed.\par
+SQL> select * from bankcursor1;\par
+ACC_NO STATUS\par
+---------- ----------\par
+1 \tab active\par
+2 \tab active\par
+3 \tab active\par
+4 \tab active\par
+\b Problem Statement 2:\par
+Organization has decided to increase the salary of employees by 10% of existing salary,         who are having salary less than average salary of organization, Whenever such salary        updates takes place, a record for the same is maintained in the increment_salary table.\par
+EMP (E_no , Salary)\par
+increment_salary(E_no ,\par
+Salary)\par
+\b0 SQL> create table emp(eno number(10),salary number(10));\par
+Table created.\par
+SQL> insert into emp values(1 ,1000);\par
+1 row created.\par
+SQL> insert into emp values(2 ,2000);\par
+1 row created.\par
+SQL> insert into emp values(3 ,113);\par
+1 row created.\par
+SQL> insert into emp values(4 ,4000);\par
+1 row created.\par
+SQL> select * from emp;\par
+       ENO     SALARY\par
+\pard\nowidctlpar\fi720\sa200\sl276\slmult1 ---------- ----------\par
+\pard\nowidctlpar\sa200\sl276\slmult1          1       1000\par
+         2       2000\par
+         3        113\par
+         4       4000\par
+      \par
+SQL> create table increment_sal(eno number(10),salary number(10));\par
+Table created.\par
+SQL> set serveroutput on;\par
+SQL> declare\par
+  2  cursor cr_sal is select eno,salary from emp where salary<(select avg(salary) from emp);\par
+  3  me_no emp.eno%type;\par
+  4  msal emp.salary%type;\par
+  5  begin\par
+  6  open cr_sal;\par
+  7  if cr_sal%isopen then\par
+  8  loop\par
+  9  fetch cr_sal into me_no,msal;\par
+ 10  exit\par
+ 11  when cr_sal%notfound;\par
+ 12  if cr_sal%found then\par
+ 13  update emp set salary=salary+(salary*0.1) where eno=me_no;\par
+ 14  select salary into msal from emp where me_no=eno;\par
+ 15  insert into increment_sal values(me_no,msal);\par
+ 16  end if;\par
+ 17  end loop;\par
+ 18  end if;\par
+ 19  end;\par
+ 20  /\par
+PL/SQL procedure successfully completed.\par
+\par
+SQL> select * from increment_sal;\par
+       ENO     SALARY\par
+---------- ----------\par
+         1       1100\par
+         3        124\par
+\par
+\b Problem Statement 3.\par
+Write PL/SQL block using explicit cursor for following requirements: College has decided to      mark all those students detained (D) who are having attendance less than 75%. Whenever       such update takes place, a record for the same is maintained in the D_Stud table.\b0\par
+SQL> create table s(rollno number(4),att number(4),status varchar(10));\par
+Table created.\par
+SQL> insert into s (rollno ,att) values(1,70);\par
+1 row created.\par
+SQL> insert into s (rollno ,att) values(2,40);\par
+1 row created.\par
+SQL> insert into s (rollno ,att) values(3,90);\par
+1 row created.\par
+SQL> insert into s (rollno ,att) values(4,80);\par
+1 row created.\par
+SQL> select * from S;\par
+ROLLNO\tab ATT\tab  STATUS\par
+---------- \tab ----------\tab  ----------\par
+   1         70\par
+   2         40\par
+   3         90\par
+   4         80\par
+\par
+SQL> create table d_s(rollno number(4),att number(4));\par
+Table created.\par
+SQL> \par
+  1  declare\par
+  2  cursor cr_att is select rollno,att,status from s where att<75;\par
+  3  mroll s.rollno%type;\par
+  4  matt s.att%type;\par
+  5  mstatus s.status%type;\par
+  6  begin\par
+  7  open cr_att;\par
+ 8  if cr_att%isopen then\par
+  9  loop\par
+ 10  fetch cr_att into mroll,matt,mstatus;\par
+ 11  exit\par
+ 12  when cr_att%notfound;\par
+ 13  if cr_att%found then\par
+ 14  update s set status='d' where rollno=mroll;\par
+ 15  insert into d_s values(mroll,matt);\par
+ 16  end if;\par
+ 17  end loop;\par
+ 18  end if;\par
+ 19* end;\par
+SQL> /\par
+PL/SQL procedure successfully completed.\par
+SQL> select * from s;\par
+ROLLNO   ATT\tab  STATUS\par
+---------- ---------- ----------\par
+ 1       70 \tab d\par
+ 2       40 \tab d\par
+ 3       90\par
+ 4       80\par
+\par
+SQL> select * from d_s;\par
+ ROLLNO   ATT\par
+----------\tab  ----------\par
+   1       70\par
+   2       40\par
+\b Problem Statement 4.\par
+Write the PL/SQL block for following requirements using parameterized\par
+Cursor: Consider table EMP(e_no, d_no, Salary), department wise average salary \par
+\pard\nowidctlpar\fi720\sa200\sl276\slmult1 should be inserted into new table dept_salary(d_no, Avg_salary)\par
+\pard\nowidctlpar\sa200\sl276\slmult1\b0 SQL> select * from emp;\par
+ENO \tab DNO\tab SALARY\par
+---------- ---------- ----------\par
+1 \tab 101\tab 15000\par
+2 \tab 103 \tab 20000\par
+3 \tab 101 \tab 10000\par
+4 \tab 102 \tab 12000\par
+5 \tab 102 \tab 7000\par
+SQL>\par
+declare\par
+cursor crsr_c1 is select dno,avg(salary) from emp group by dno;\par
+cursor crsr_chk (mdno number)is select dno,avg(salary) from emp group by dno\par
+having dno=mdno;\par
+d emp.dno%type;\par
+sal emp.salary%type;\par
+mdno emp.dno%type;\par
+begin\par
+for i in crsr_c1\par
+loop\par
+d:=i.dno;\par
+open crsr_chk(d);\par
+fetch crsr_chk into mdno,sal;\par
+insert into dept_salary values(mdno,sal);\par
+close crsr_chk;\par
+end loop;\par
+end;\par
+/\par
+PL/SQL procedure successfully completed.\par
+SQL> select * from dept_salary;\par
+DNO \tab SALARY\par
+---------- ----------\par
+102\tab 9500\par
+101\tab 12500\par
+103\tab 20000\par
+\b Problem Statement 5. \par
+Write PL/SQL block using explicit cursor: Cursor FOR Loop for following requirements:          College has decided to mark all those students detained (D) who are having attendance less     than 75%. Whenever such update takes place, a record for the same is maintained in the      D_Stud table.\par
+\b0 create table stud21(roll number(4), att number(4), status varchar(1));\par
+create table d_stud(roll number(4), att number(4));\par
+SQL> select * from stud21;\par
+ROLL \tab ATT \tab STATUS\par
+---------- ---------- ---\par
+101 \tab 80\par
+102 \tab 34\par
+103\tab 70\par
+104\tab 60\par
+105 \tab 65\par
+106 \tab 81\par
+SQL> declare\par
+cursor cr is select * from stud21 where att<75; \par
+begin\par
+for demo in cr\par
+loop\par
+update stud21 set status='D' where roll=demo.roll;\par
+insert into d_stud values(demo.roll,demo.att);\par
+end loop;\par
+end;\par
+/\par
+PL/SQL procedure successfully completed.\par
+SQL> select * from stud21;\par
+ROLL \tab ATT\tab STATUS \par
+-------- ---------- ---------\par
+101 \tab 80\par
+102 \tab 34\tab  D\par
+103 \tab 70\tab  D\par
+104 \tab 60\tab  D\par
+105 \tab 65\tab  D\par
+106 \tab 81\par
+6 rows selected.\par
+SQL> select * from d_stud;\par
+ROLL \tab ATT\par
+---------- ----------\par
+102 \tab 34\par
+103 \tab 70\par
+104 \tab 60\par
+105 \tab 65\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+}
+ 

@@ -1,0 +1,332 @@
+Assignment No. 6
+
+Problem Statement 1: The bank manager has decided to activate all those accounts which were
+previously marked as inactive for performing no transaction in last 365 days. Write a PL/SQ block
+(using implicit cursor) to update the status of account, display an approximate message based on the
+no. of rows affected by the update. (Use of %FOUND, %NOTFOUND, %ROWCOUNT)
+Solution:
+Declare
+Rows_affe number(10);
+Begin
+update bankcursor set status='active'where
+status='inactive'; Rows_affe:=(SQL%rowcount);
+dbms_output.put_line(Rows_affe||' rows are
+affected...'); END;
+Solution :
+SQL> create table bankcursor(acc_no number(10),status varchar(10));
+Table created.
+SQL> select * from bankcursor;
+ACC_NO STATUS
+---------- ----------
+101 active
+102 inactive
+103 inactive
+104 active
+105 inactive
+
+
+SQL>
+Declare
+Rows_affe number(10);
+Begin
+update bankcursor set status='active'where status='inactive';
+Rows_affe:=(SQL%rowcount);
+dbms_output.put_line(Rows_affe||' rows are affected...');
+END;
+/
+3 rows are affected...
+PL/SQL procedure successfully completed.
+
+
+SQL> select * from bankcursor;
+ACC_NO STATUS
+---------- ----------
+106 active
+107 active
+108 active
+109 active
+110 active
+
+
+Problem Statement 2: Organization has decided to increase the salary of employees by 10% of
+existing salary, who are having salary less than average salary of organization, Whenever such
+salary updates takes place, a record for the same is maintained in the increment_salary table.
+EMP (E_no , Salary)
+increment_salary(E_no ,
+Salary) code:
+
+
+Declare
+Cursor crsr_sal is select e_no,salary from emp2 where salary<(select avg(salary) from emp2);
+me_no emp2.e_no%type;
+msalary emp2.salary%type;
+Begin
+open crsr_sal;
+if crsr_sal%isopen then
+loop
+fetch crsr_sal into me_no,msalary;
+exit when crsr_sal%notfound;
+if crsr_sal%found then
+update emp2 set salary=salary+(salary*0.1) where
+e_no=me_no; select salary into msalary from emp2 where
+e_no=me_no; insert into increament_t values(me_no,msalary);
+end if;
+end loop;
+end if;
+end;
+
+
+SQL> create table emp2(e_no number(10),salary number(10));
+Table created.
+
+SQL> select * from emp2;
+E_NO SALARY
+---------- ----------
+101 1000
+102 2000
+103 113
+104 4000
+
+
+SQL> create table increament_t(eno number(10),sal number(10));
+Table created.
+SQL>
+
+
+Declare
+Cursor crsr_sal is select e_no,salary from emp2 where salary<(select
+avg(salary) from emp2);
+me_no emp2.e_no%type;
+msalary emp2.salary%type;
+Begin
+open crsr_sal;
+if crsr_sal%isopen then
+loop
+fetch crsr_sal into me_no,msalary;
+exit when crsr_sal%notfound;
+if crsr_sal%found then
+update emp2 set salary=salary+(salary*0.1) where e_no=me_no; 14
+select salary into msalary from emp2 where e_no=me_no;
+insert into increament_t values(me_no,msalary);
+end if;
+end loop;
+end if;
+end;
+/
+PL/SQL procedure successfully completed.
+
+
+SQL> select * from emp2;
+E_NO SALARY
+---------- ----------
+105 1100
+106 2000
+107 113
+108 4000
+SQL> select * from increament_t;
+ENO SAL
+---------- ----------
+101 1100
+103 113
+
+
+Problem Statement 3. Write PL/SQL block using explicit cursor for following requirements: College
+has decided to mark all those students detained (D) who are having attendance less than 75%. Whenever
+such update takes place, a record for the same is maintained in the D_Stud table. create table
+stud21(roll number(4), att number(4), status varchar(1));
+create table d_stud(roll number(4), att number(4)); SQL> select * from stud21;
+ROLL ATT S
+---------- ---------- -
+101 80
+102 34
+103 70
+104 60
+105 65
+106 81
+6 rows selected.
+
+
+SQL> declare
+cursor cr_att is select roll,att,status from stud21 where att<75;
+mroll stud21.roll%type;
+matt stud21.att%type;
+mstatus stud21.status%type;
+begin
+open cr_att;
+if cr_att%isopen then
+loop
+fetch cr_att into mroll,matt,mstatus;
+exit when cr_att%notfound;
+if cr_att%found then
+update stud21 set status='D' where roll=mroll;
+insert into d_stud values(mroll,matt);
+end if;
+end loop;
+end if;
+end;
+/
+
+
+PL/SQL procedure successfully completed.
+SQL> select * from stud21;
+ROLL ATT S
+------- ------ ----
+101 80
+102 34 D
+103 70 D
+104 60 D
+105 65 D
+106 81
+6 rows selected.
+SQL> select * from d_stud;
+ROLL ATT
+---------- ----------
+102 34
+103 70
+104 60
+105 65
+
+
+
+
+Problem Statemebt 4. Write a PL/SQL block of code using parameterized Cursor, that will merge the
+data available in the newly created table N_RollCall with the data available in the table O_RollCall. If
+the data in the first table already exist in the second table then that data should be skipped. output:
+SQL> select * from stud21;
+ROLL ATT S
+---------- ---------- -
+101 65
+102 80
+103 75
+104 43
+105 90
+SQL> select * from d_stud;
+no rows selected
+SQL>
+declare
+cursor crsr_class is select * from o_rollcall;
+cursor crsr_chk (roll number) is select roll_no from n_rollcall where roll_no=roll;
+roll n_rollcall.roll_no%type;
+matt n_rollcall.att%type;
+v number(10);
+begin
+open crsr_class;
+loop
+fetch crsr_class into roll,matt;
+exit when crsr_class%notfound;
+open crsr_chk(roll );
+fetch crsr_chk into v;
+if crsr_chk%found then
+dbms_output.put_line('stud'||roll||'exist');
+else
+dbms_output.put_line('stud'||roll||'not exist so inserting in new class');
+insert into n_rollcall values(roll,matt);
+end if;
+close crsr_chk;
+end loop;
+close crsr_class;
+end;
+/
+
+PL/SQL procedure successfully completed.
+
+
+SQL> select * from stud21;
+ROLL ATT S
+------ ---------- ----
+101 65 D
+102 80
+103 75
+104 43 D
+105 90
+SQL> select * from d_stud;
+ROLL ATT
+---------- ----------
+101 65
+104 43
+
+
+
+Problem Statement 5. Write the PL/SQL block for following requirements using parameterized
+Cursor: Consider table EMP(e_no, d_no, Salary), department wise average salary should be inserted
+into new table dept_salary(d_no, Avg_salary)
+SQL> select * from emp;
+ENO DNO SALARY
+---------- ---------- ----------
+1 101 15000
+2 103 20000
+3 101 10000
+4 102 12000
+5 102 7000
+
+
+SQL>
+declare
+cursor crsr_c1 is select dno,avg(salary) from emp group by dno;
+cursor crsr_chk (mdno number)is select dno,avg(salary) from emp group by dno having dno=mdno;
+d emp.dno%type;
+sal emp.salary%type;
+mdno emp.dno%type;
+begin
+for i in crsr_c1
+loop
+d:=i.dno;
+open crsr_chk(d);
+fetch crsr_chk into mdno,sal;
+insert into dept_salary values(mdno,sal);
+close crsr_chk;
+end loop;
+end;
+/
+PL/SQL procedure successfully completed.
+SQL> select * from dept_salary;
+DNO SALARY
+---------- ----------
+102 9500
+101 12500
+103 20000
+
+
+Problem Statement 6. Write PL/SQL block using explicit cursor: Cursor FOR Loop for following
+requirements: College has decided to mark all those students detained (D) who are having attendance
+less than 75%. Whenever such update takes place, a record for the same is maintained in the D_Stud
+table.
+create table stud21(roll number(4), att number(4), status varchar(1)); create table d_stud(roll
+number(4), att number(4));
+SQL> select * from stud21;
+ROLL ATT S
+---------- ---------- ---
+101 80
+102 34
+103 70
+104 60
+105 65
+106 81
+SQL> declare
+cursor cr is select * from stud21 where att<75; 3
+begin
+for demo in cr
+loop
+update stud21 set status='D' where roll=demo.roll;
+insert into d_stud values(demo.roll,demo.att);
+end loop;
+end;
+/
+PL/SQL procedure successfully completed.
+SQL> select * from stud21;
+ROLL ATT S
+-------- ---------- ---------
+101 80
+102 34 D
+103 70 D
+104 60 D
+105 65 D
+106 81
+6 rows selected.
+SQL> select * from d_stud;
+ROLL ATT
+---------- ----------
+102 34
+103 70
+104 60
+105 65
