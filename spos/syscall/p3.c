@@ -43,8 +43,8 @@ int main()
 			case 4:
 					system("ps");
 					break;
-			case 5:	
-					system("join f1.txt f2.txt -a 1\n");
+			case 5:		
+					system("join f1.txt f2.txt -a 1 > f3.txt\n");
 					break;
 			case 6:
 					exit(0);
