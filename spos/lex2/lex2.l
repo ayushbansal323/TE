@@ -38,3 +38,15 @@ int main()
   
     return 0; 
 } 
+
+/*
+ubuntu@PL-LAB:~/TA02/spos/lex2$ lex lex2.l 
+ubuntu@PL-LAB:~/TA02/spos/lex2$ cc lex.yy.c 
+ubuntu@PL-LAB:~/TA02/spos/lex2$ ./a.out < test.txt 
+Number of lines are 		-> 3
+Number of Space are 		-> 7
+Number of Digits are 		-> 4
+Number of char are 			-> 42
+Number of Special char are 	-> 1
+Number of words are 		-> 10
+*/
