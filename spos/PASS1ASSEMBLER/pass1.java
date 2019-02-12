@@ -1,4 +1,4 @@
-package pass1Assembler;
+
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -23,9 +23,11 @@ public class pass1 {
 		
 		int lc = 0;
 		int ltlength=0;
+		int poolstrt=0;
 		ltTab lttab[] = new ltTab[100] ;
 		BufferedReader sourceCode = new BufferedReader(new FileReader("/home/ubuntu/TE/spos/PASS1ASSEMBLER/input.asm"));
 		BufferedWriter symTab = new BufferedWriter(new FileWriter("/home/ubuntu/TE/spos/PASS1ASSEMBLER/symtab"));
+		BufferedWriter poolTab = new BufferedWriter(new FileWriter("/home/ubuntu/TE/spos/PASS1ASSEMBLER/pooltab"));
 	
 		String sourceLine;
 	    while ((sourceLine = sourceCode.readLine()) != null)
@@ -65,11 +67,21 @@ public class pass1 {
 	    			  ltfile.write(wrt);
 	    			  System.out.print("\t"+wrt);
 					 }
+	    		  String poolstr=poolstrt+" "+(ltlength-poolstrt)+"\n";
+	    		  poolTab.write(poolstr);
+	    		  poolstrt=ltlength;
+	    		  
+	    		  poolTab.close();
 	    		  ltfile.close();
+	    		  
 	    		  System.exit(0);
 	    	  }
 	    	  else if(tokens[0].equals("LTORG"))
 	    	  {
+	    		  String poolstr=poolstrt+" "+(ltlength-poolstrt)+"\n";
+	    		  poolTab.write(poolstr);
+	    		  poolstrt=ltlength;
+	    		  System.out.println(poolstr);
 	    		  for(int j=0;j<ltlength;j++)
 					 {
 	    			  if(lttab[j].location == 0)
