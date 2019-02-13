@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>jquery</title>
+	<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+				$("#test").on('click',function(){
+					var x=$("#data").val();
+					alert("your Secret msg is "+x);
+					$("#test").hide();
+				});
+
+				$("#color").on('click',function(){
+
+					$("h1").fadeOut('slow');
+
+					$colour=new Array("green","blue","red","pink","black","yellow");
+					$rno=Math.floor((Math.random()*10)%7);
+					$("h1").css("color",$colour[$rno]);
+					
+					$("h1").fadeIn('slow');
+
+					$("h1").fadeOut('slow');
+
+					$colour=new Array("green","blue","red","pink","black","yellow");
+					$rno=Math.floor((Math.random()*10)%7);
+					$("h1").css("color",$colour[$rno]);
+				});
+			});
+
+
+	</script>
+</head>
+<body>
+	<h1>My jQuery PAge</h1>
+	<input type="password" placeholder="Secret Text" id="data"></input>
+	<button id="test">Submit</button>
+
+	<button id="color">Disco</button>
+
+</body>
+</html>
