@@ -71,6 +71,11 @@ INSERT INTO cntc_dets values(4,'telephone',9579510990);
 /*List the employee details along with contact details using left outer join & right join*/
 SELECT * FROM emp_mstr RIGHT JOIN cntc_dets on e_mpno=code_no;
 SELECT * FROM emp_mstr LEFT OUTER JOIN cntc_dets on e_mpno=code_no;
-/*5. Create following Tables*/
-/*5. List the customer who do not have bank branches in their vicinity.*/
-
+/*
+6. a) Create View on borrower table by selecting any two columns and perform insert update
+delete operations
+b) Create view on borrower and depositor table by selecting any one column from each table
+perform insert update delete operations
+c) create updateable view on borrower table by selecting any two columns and perform insert,
+update and delete operations
+*/

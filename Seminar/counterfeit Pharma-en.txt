@@ -1,0 +1,48 @@
+When it comes to getting medication from the manufacturer to the physicians and patients, Africa is facing a severe problem with counterfeit drugs.
+For costs associated with the use of counterfeit medicines, individuals, families, and health systems are staggering.
+Every year more than 122,000 African children under the age of five lose their lives as a result of counterfeit antimalarials alone.
+What if we could track, trace, and authenticate the drugs at each stage of their journey from the pharma company all the way to the patient?
+That's exactly what researchers at the IBM Lab in Haifa, Israel are doing.
+We're using blockchain technology to introduce traceability and trackability into the supply chain.
+Using blockchain, we can make sure there's a verifiable provenance of what is delivered, by whom, to whom, when, and where.
+Within the pharma supply chain, we're setting up a trusted network that allows the different parties to store information,
+knowing that only authorized members can see it, and the information can't be altered once it's been entered.
+Specifically for pharmaceutical orders, we can verify that the authentic drugs are handed over to an authorized party at each transfer point,
+ensure compliance with the proper conditions for transportation and asset transfer,
+and we can also make sure that a joint verified ledger of all transactions is available at all times.
+This means provenance of each and every drug in the supply chain.
+Any party in the network can see the status of where the drugs are and who has them.
+This solution from IBM research includes the mobile interface and the permission blockchain backend that gives each certified and authorized party in the network
+a way to initiate action, finish their transaction, track its progress and verify that it was done correctly.
+Let's look at an example of how this would work.
+This is Dr. Msia. She needs tuberculosis vaccines for her patients.
+Dr. Msia already checked the prices at the local pharmacies and decided to order from ABC Pharma.
+She knows that if she arranges delivery from the pharmacy using blockchain, she'll have more confidence that the drugs are authentic and also get a better price.
+At ABC Pharma in Kenya, Imani received an order from Dr. Msia in Koru asking for three BCG ampoules.
+The order is registered in the blockchain.
+Imani prepares the delivery for Dr. Msia in Koru and scans the QR codes and serial numbers of the vaccines for the blockchain.
+The order is ready to go and the next step involves selecting the delivery carrier.
+From the list of possible carriers available in the blockchain system, Imani selects Solomon who has a good reputation score and is not overloaded with orders today.
+Solomon is motivated to supply a high quality service, because his reputation score is calculated based on the ratings he receives.
+This reputation score helps him get more business from other hospitals and clinics.
+He heads to ABC Pharma where he meets Imani.
+When he arrives, Solomon authenticates to the blockchain system.
+Imani initializes the delivery transfer.
+And then Solomon checks the serial numbers of the vaccines and accepts the delivery.
+All this is recorded and the transaction is appended to the blockchain ledger after verifying that both Imani and Solomon are physically at the ABC Pharma premises.
+Solomon heads out. The BCG vaccines are stored in a refrigerated box equipped with temperature sensors.
+The sensors sent a reading every 60 seconds and any alarms are saved in the blockchain.
+Solomon arrives in Koru and heads to Dr. Msia's clinic.
+Dr. Msia greets Solomon and they both examine the delivery.
+Dr. Msia received an SMS earlier with the tracking code. Together they authenticate using the blockchain.
+Dr. Msia verifies the tracking code number of the delivery and scans in and verifies the vaccines using a QR code scanner.
+She also verifies via blockchain that there were no alerts regarding the temperature during transport.
+Dr. Msia accepts the delivery.
+Solomon accepts the delivery transfer.
+And the transfer is appended to the blockchain, which now shows the vaccines at the Koru location.
+Solomon's reputation score and number of open deliveries are updated.
+And Dr. Msia can continue keeping her patients healthy.
+Back at ABC Pharma, Imani examines the status of today's blockchain transactions.
+Happily, all went well with the transfer to Dr. Msia.
+This innovative blockchain solution from IBM research offers new benefits.
+It reduces the loss from counterfeit drugs, offers shorter lead times of cycles from pharma to patient, and introduces a non-repudiation process with provenance and trackability for fast resolution of any conflicts.
