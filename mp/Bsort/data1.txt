@@ -1,0 +1,20 @@
+7
+4
+2
+1
+8
+
+Sorting using bubble sort Operation successful.
+Output stored in same file...
+
+
+
+
+
+12478
+this is my program
+---------------------------------------
+
+
+Exit from program...
+

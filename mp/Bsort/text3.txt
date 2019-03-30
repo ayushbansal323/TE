@@ -1,0 +1,17 @@
+4
+5
+6
+3
+2
+
+Sorting using bubble sort Operation successful.
+Output stored in same file...
+
+
+
+
+
+23456
+
+Exit from program...
+

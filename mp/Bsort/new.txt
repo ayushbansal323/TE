@@ -1,0 +1,14 @@
+5
+7
+2
+1
+9
+
+Sorting using bubble sort Operation successful.
+Output stored in same file...
+
+
+
+
+
+12579
