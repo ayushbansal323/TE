@@ -50,6 +50,12 @@ class bankersalgo {
     public void isSafe(){
        input();
        calc_need();
+       for(int i=0;i<np;i++)
+       {
+         for(int j=0;j<nr;j++)  //calculating need matrix
+          System.out.print(""+need[i][j]);
+         System.out.println();
+       }
        boolean done[]=new boolean[np];
        int j=0;
  
