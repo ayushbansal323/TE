@@ -4,6 +4,16 @@ import java.io.*;
 /**
  * pass1assembler
  */
+class PoolTable
+{
+    int count;
+    int literalCount[];
+    PoolTable()
+    {
+        count=0;
+        literalCount=new int[100];
+    }
+}
 class SymbolTable{
     int count;
     int value[];
@@ -77,12 +87,14 @@ public class pass1assembler {
         String REG[]={"AX","BX","CX","DX"};
         String CC[]= {"LT","LE","GT","GE","EQ","ANY"};
         int LC=0;
+        PoolTable pt=new PoolTable();
         LiteralTable LT=new LiteralTable();
         SymbolTable symtb=new SymbolTable();
         BufferedReader input = new BufferedReader(new FileReader("input.asm"));
         BufferedWriter output = new BufferedWriter(new FileWriter("output.i"));
         BufferedWriter symtab = new BufferedWriter(new FileWriter("SYMTAB"));
         BufferedWriter lttab = new BufferedWriter(new FileWriter("LTTAB"));
+        BufferedWriter pttab = new BufferedWriter(new FileWriter("PTTAB"));
         String inputLine ;
         while((inputLine=input.readLine())!=null)
         {
@@ -113,7 +125,7 @@ public class pass1assembler {
                             {
                                 temp=LT.count;
                                 LT.Symbol[LT.count]=Tokenizeline[i];
-                                LT.count++;
+                                LT.count++;    
                             }
                             System.out.print("(L,"+temp+")\t");
                             output.write("(L,"+temp+")\t");
@@ -163,8 +175,10 @@ public class pass1assembler {
                         {
                             LT.address[i]=LC;
                             LC++;
+                            pt.literalCount[pt.count]++;
                         }
                     }
+                    pt.count++;
                 }
                 else if(Tokenizeline[0].equals("END")){
                     for (int i = 0; i < LT.count; i++) {
@@ -172,9 +186,10 @@ public class pass1assembler {
                         {
                             LT.address[i]=LC;
                             LC++;
+                            pt.literalCount[pt.count]++;
                         }
                     }
-
+                    pt.count++;
                     break;
                 }
                 else if(Tokenizeline[0].equals("ORIGIN")){
@@ -270,6 +285,12 @@ public class pass1assembler {
             System.out.println(i+"\t"+LT.Symbol[i]+"\t"+LT.address[i]);
             lttab.write(i+"\t"+LT.Symbol[i]+"\t"+LT.address[i]+"\n");
         }
+        System.out.println("\n\tPOOL Table\t\nIndex\tLiteral count");
+        pttab.write("Index\tLiteral count\n");
+        for (int i = 0; i < LT.count; i++) {
+            System.out.println(i+"\t"+pt.literalCount[i]);
+            pttab.write(i+"\t"+pt.literalCount[i]+"\n");
+        }
         System.out.println("\n\tSymbol Table\t\nIndex\tSymbol\tType\tValue");
         symtab.write("Index\tSymbol\tType\tValue\n");
         for (int i = 0; i < symtb.count; i++) {
@@ -278,6 +299,7 @@ public class pass1assembler {
         }
         input.close();
         lttab.close();
+        pttab.close();
         symtab.close();
         output.close();
 
@@ -285,25 +307,30 @@ public class pass1assembler {
 }
 /*
  PASS 1 ASSEMBLER 
-(AD,1)	(C,100)	
-(IS,4)	(L,0)	(S,1)	
-(AD,2)	
-(IS,2)	(L,1)	(S,2)	
-(IS,7)	(5)	
-(DS,0)	(S,1)	(C,104)
-(AD,0)	(S,3)	(C,10)
-(DS,1)	(S,2)	(C,105)
-(IS,6)	(R,1)	(C,2)	
-(AD,3)	
-	Literal Table	
-Index	Symbol	address
-0	=F'5'	101
-1	=F'6'	111
+(AD,1)  (C,100)
+(IS,4)  (L,0)   (S,1)
+(AD,2)
+(IS,2)  (L,1)   (S,2)
+(IS,7)  (5)
+(DS,0)  (S,1)   (C,104)
+(AD,0)  (S,3)   (C,10)
+(DS,1)  (S,2)   (C,105)
+(IS,6)  (R,1)   (C,2)
+(AD,3)
+        Literal Table
+Index   Symbol  address
+0       =F'5'   101
+1       =F'6'   111
 
-	Symbol Table	
-Index	Symbol	Type	Value
-0	Loop	R	100
-1	M	R	104
-2	N	R	105
-3	R	A	10
+        POOL Table
+Index   Literal count
+0       1
+1       1
+
+        Symbol Table
+Index   Symbol  Type    Value
+0       Loop    R       100
+1       M       R       104
+2       N       R       105
+3       R       A       10
 */
