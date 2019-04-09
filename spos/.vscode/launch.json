@@ -2,6 +2,18 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - pass1",
+            "request": "launch",
+            "mainClass": "pass1"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - pass1assembler",
+            "request": "launch",
+            "mainClass": "pass1assembler"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - PagingSimulation",
             "request": "launch",
             "mainClass": "PagingSimulation"

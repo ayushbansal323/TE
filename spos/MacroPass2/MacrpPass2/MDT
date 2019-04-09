@@ -1,0 +1,11 @@
+INDEX ****MDT*****
+0 INCR &X,&Y,&REG
+1 MOVER #3,#1
+2 ADD #3,#2
+3 MOVEM #3,AREG
+4 MEND
+5 DEC &X,&Y,&REG
+6 MOVER #3,#1
+7 SUB #3,#2
+8 MOVEM #3,#1
+9 MEND
