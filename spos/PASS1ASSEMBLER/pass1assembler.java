@@ -238,8 +238,8 @@ public class pass1assembler {
                         symtb.value[temp]=LC;
                     }
                     LC++;
-                    System.out.print("(DS,0)\t(S,"+temp+")\t(C,"+symtb.value[temp]+")\n");
-                    output.write("(DS,0)\t(S,"+temp+")\t(C,"+symtb.value[temp]+")\n");
+                    System.out.print("(DS,0)\t(S,"+temp+")\t(C,"+Tokenizeline[2]+")\n");
+                    output.write("(DS,0)\t(S,"+temp+")\t(C,"+Tokenizeline[2]+")\n");
                 }
                 else if(Tokenizeline[1].equals("DS")){
                     temp = symtb.search(Tokenizeline[0]);
@@ -257,8 +257,8 @@ public class pass1assembler {
                         symtb.value[temp]=LC;
                     }
                     LC=LC+Integer.parseInt(Tokenizeline[2]);
-                    System.out.print("(DS,1)\t(S,"+temp+")\t(C,"+symtb.value[temp]+")\n");
-                    output.write("(DS,1)\t(S,"+temp+")\t(C,"+symtb.value[temp]+")\n");
+                    System.out.print("(DS,1)\t(S,"+temp+")\t(C,"+Tokenizeline[2]+")\n");
+                    output.write("(DS,1)\t(S,"+temp+")\t(C,"+Tokenizeline[2]+")\n");
                 }
             }
             else
