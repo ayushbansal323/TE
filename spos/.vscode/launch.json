@@ -2,6 +2,18 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - RoundRobin",
+            "request": "launch",
+            "mainClass": "RoundRobin"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - pass2assembler",
+            "request": "launch",
+            "mainClass": "pass2assembler"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - pass1",
             "request": "launch",
             "mainClass": "pass1"
