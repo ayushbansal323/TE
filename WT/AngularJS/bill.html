@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.7/angular.min.js"></script>
+	<script type="text/javascript">
+		var app=angular.module("bill",[]);
+
+		app.controller("billcont",["$scope",function ($scope) {
+			$scope.arrlist=[{"name":"water","status":false},{"name":"electricity","status":false}];
+			$scope.counter=2;
+			
+			$scope.add=function() {
+				$scope.arrlist.push({"name":$scope.t1 ,"status":false});
+				$scope.counter++;				
+			};
+
+			$scope.remove=function () {
+				for (var i = $scope.arrlist.length - 1; i >= 0; i--) {
+					if($scope.arrlist[i].status==true)
+					{
+						$scope.arrlist.splice(i,1);
+						$scope.counter--;		
+					}
+				}
+			}
+		}])
+	</script>
+</head>
+<body ng-app="bill">
+	<div ng-controller="billcont">
+		<form name="frm" ng-submit="add()" >
+			<input type="text" ng-model="t1" name="t1" placeholder="Bill" required>
+			<button ng-disabled="frm.$invalid">Add</button>
+		</form>
+		<ul>
+			<li ng-repeat="list in arrlist track by $index"><input type="checkbox" value="$index" name="checklist" ng-model="list.status"><span ng-class="expression">{{list.name}}</span>
+			</li>
+		</ul>
+		<h1>Bills remaining {{counter}}<h1>
+		<input type="button" ng-click="remove()" value="Done">
+	</div>
+</body>
+</html>

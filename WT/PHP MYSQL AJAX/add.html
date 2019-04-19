@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CRUD</title>
+	<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#submit").on("click",function() {
+				$.post("add.php",{id:$("#id").val(),name:$("#name").val(),age:$("#age").val(),city:$("#city").val(),type:$(".type").val()},function(data) {
+					$("#Result").html(data);
+				})
+			})
+
+			$(".type").on("click",function () {
+				if($(".type").val()=="search" || $(".type").val()=="delete")
+				{
+				$("#id").attr("hidden",false);
+				$("#name").attr("hidden",true);
+				$("#age").attr("hidden",true);
+				$("#city").attr("hidden",true);
+				}
+				else if($(".type").val()=="create" || $(".type").val()=="update" )
+				{
+				$("#id").attr("hidden",false);
+				$("#name").attr("hidden",false);
+				$("#age").attr("hidden",false);
+				$("#city").attr("hidden",false);
+				}
+			})
+		})
+	</script>
+</head>
+<body>
+<input type="text" id="id" placeholder="id" hidden>
+<input type="text" id="name" placeholder="name" hidden>
+<input type="text" id="age" placeholder="age" hidden>
+<input type="text" id="city" placeholder="city" hidden>
+<br>
+<!--
+<input type="radio" class="type" value="create" name="type">create
+<input type="radio" class="type" value="search" name="type">search
+<input type="radio" class="type" value="update" name="type">update
+<input type="radio" class="type" value="delete" name="type">delete
+<br>-->
+ <select class="type">
+  <option value="search">search</option>
+  <option value="create">create</option>
+  <option value="update">update</option>
+  <option value="delete">delete</option>
+</select> 
+<button type="submit" id="submit" >CLICK ME</button>
+<h3 id="Result"></h3>
+
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <style>
+
+  *{
+    background-color: #e2f5ff;
+  }
+
+  .form{
+    text-align: center;
+    color: blue;
+    background-color: skyblue;
+    border: 0.5em solid;
+    margin-left: 30%;
+    margin-right:30%;
+    padding-top: 10%;
+    padding-bottom: 10%;
+  }
+  .text{
+    margin-top: 2%;
+    margin-bottom:  1%;
+    width: 50%;
+  }
+  #button{
+    margin-top: 3%;
+    padding: 1%;
+  }
+  </style>
+  
+
+</head>
+<body>
+<br>
+<form class="form" action="javascript:submit2()" id="mainform" name="mainform">Educational Details<br><br>
+  <input type="text" id="username" class="text" placeholder="First Name"> <br>
+  <input type="text" id="lname" class="text" placeholder="Lastname"> <br>
+  <input type="email" id="email" class="text" placeholder="email"> <br>
+  <input type="tel" id="number" class="text" placeholder="Phone No"> <br><br>
+  <input type="radio" name="gender" id="gender" value="Male" >Male
+  <input type="radio" name="gender" id="gender" value="Female">Female<br><br>
+  <!-- <input type="text" id="city" class="text" placeholder="City"> <br> -->
+
+  Select City <select id="DropCity">
+      <option value="pune">Pune</option>
+      <option value="nishik">Nishik</option>
+      <option value="mumbai">Mumbai</option>
+      <option value="nagpur">Nagpur</option>
+  </select><br><br>
+
+  <textarea placeholder="Address" id="address" cols="36" ></textarea><br><br>
+  <input type="checkbox"  id="agree" >Feedback given as Per Your Best knowledge <br>
+  <input type="submit"  class="text"  id="button" value="NEXT"  ><br>
+  
+</form>
+<script type="text/javascript" src="index.js"></script>
+</body>
+</html>
