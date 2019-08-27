@@ -1,0 +1,330 @@
+			 Tower of Hanoi
+
+		 Heuristics:  Best First
+		 File: Generated States
+
+
+Movement number: 1
+Current state of Towers:
+TA: [4, 3, 2, 1]
+TB: []
+TC: []
+
+Possible Movements:
+			Heuristics value: : 4
+	TA: [4, 3, 2]
+	TB: []
+	TC: [1]
+
+			Heuristics value: : 2
+	TA: [4, 3, 2]
+	TB: [1]
+	TC: []
+
+Movement number: 2
+Current state of Towers:
+TA: [4, 3, 2]
+TB: [1]
+TC: []
+
+Possible Movements:
+			Heuristics value: : 2
+	TA: [4, 3]
+	TB: [1]
+	TC: [2]
+
+			Heuristics value: : 6
+	TA: [4, 3, 2, 1]
+	TB: []
+	TC: []
+
+			Heuristics value: : 4
+	TA: [4, 3, 2]
+	TB: []
+	TC: [1]
+
+Movement number: 3
+Current state of Towers:
+TA: [4, 3]
+TB: [1]
+TC: [2]
+
+Possible Movements:
+			Heuristics value: : 4
+	TA: [4, 3, 1]
+	TB: []
+	TC: [2]
+
+			Heuristics value: : 2
+	TA: [4, 3]
+	TB: []
+	TC: [2, 1]
+
+			Heuristics value: : 6
+	TA: [4, 3, 2]
+	TB: [1]
+	TC: []
+
+Movement number: 4
+Current state of Towers:
+TA: [4, 3]
+TB: []
+TC: [2, 1]
+
+Possible Movements:
+			Heuristics value: : 2
+	TA: [4]
+	TB: [3]
+	TC: [2, 1]
+
+			Heuristics value: : 6
+	TA: [4, 3]
+	TB: [1]
+	TC: [2]
+
+			Heuristics value: : 4
+	TA: [4, 3, 1]
+	TB: []
+	TC: [2]
+
+Movement number: 5
+Current state of Towers:
+TA: [4]
+TB: [3]
+TC: [2, 1]
+
+Possible Movements:
+			Heuristics value: : 6
+	TA: [4, 3]
+	TB: []
+	TC: [2, 1]
+
+			Heuristics value: : 4
+	TA: [4]
+	TB: [3, 1]
+	TC: [2]
+
+			Heuristics value: : 2
+	TA: [4, 1]
+	TB: [3]
+	TC: [2]
+
+Movement number: 6
+Current state of Towers:
+TA: [4, 1]
+TB: [3]
+TC: [2]
+
+Possible Movements:
+			Heuristics value: : 6
+	TA: [4]
+	TB: [3]
+	TC: [2, 1]
+
+			Heuristics value: : 4
+	TA: [4]
+	TB: [3, 1]
+	TC: [2]
+
+			Heuristics value: : 2
+	TA: [4, 1]
+	TB: [3, 2]
+	TC: []
+
+Movement number: 7
+Current state of Towers:
+TA: [4, 1]
+TB: [3, 2]
+TC: []
+
+Possible Movements:
+			Heuristics value: : 4
+	TA: [4]
+	TB: [3, 2]
+	TC: [1]
+
+			Heuristics value: : 2
+	TA: [4]
+	TB: [3, 2, 1]
+	TC: []
+
+			Heuristics value: : 6
+	TA: [4, 1]
+	TB: [3]
+	TC: [2]
+
+Movement number: 8
+Current state of Towers:
+TA: [4]
+TB: [3, 2, 1]
+TC: []
+
+Possible Movements:
+			Heuristics value: : 2
+	TA: []
+	TB: [3, 2, 1]
+	TC: [4]
+
+			Heuristics value: : 6
+	TA: [4, 1]
+	TB: [3, 2]
+	TC: []
+
+			Heuristics value: : 4
+	TA: [4]
+	TB: [3, 2]
+	TC: [1]
+
+Movement number: 9
+Current state of Towers:
+TA: []
+TB: [3, 2, 1]
+TC: [4]
+
+Possible Movements:
+			Heuristics value: : 4
+	TA: [1]
+	TB: [3, 2]
+	TC: [4]
+
+			Heuristics value: : 2
+	TA: []
+	TB: [3, 2]
+	TC: [4, 1]
+
+			Heuristics value: : 6
+	TA: [4]
+	TB: [3, 2, 1]
+	TC: []
+
+Movement number: 10
+Current state of Towers:
+TA: []
+TB: [3, 2]
+TC: [4, 1]
+
+Possible Movements:
+			Heuristics value: : 2
+	TA: [2]
+	TB: [3]
+	TC: [4, 1]
+
+			Heuristics value: : 6
+	TA: []
+	TB: [3, 2, 1]
+	TC: [4]
+
+			Heuristics value: : 4
+	TA: [1]
+	TB: [3, 2]
+	TC: [4]
+
+Movement number: 11
+Current state of Towers:
+TA: [2]
+TB: [3]
+TC: [4, 1]
+
+Possible Movements:
+			Heuristics value: : 6
+	TA: []
+	TB: [3, 2]
+	TC: [4, 1]
+
+			Heuristics value: : 4
+	TA: [2]
+	TB: [3, 1]
+	TC: [4]
+
+			Heuristics value: : 2
+	TA: [2, 1]
+	TB: [3]
+	TC: [4]
+
+Movement number: 12
+Current state of Towers:
+TA: [2, 1]
+TB: [3]
+TC: [4]
+
+Possible Movements:
+			Heuristics value: : 6
+	TA: [2]
+	TB: [3]
+	TC: [4, 1]
+
+			Heuristics value: : 4
+	TA: [2]
+	TB: [3, 1]
+	TC: [4]
+
+			Heuristics value: : 2
+	TA: [2, 1]
+	TB: []
+	TC: [4, 3]
+
+Movement number: 13
+Current state of Towers:
+TA: [2, 1]
+TB: []
+TC: [4, 3]
+
+Possible Movements:
+			Heuristics value: : 4
+	TA: [2]
+	TB: []
+	TC: [4, 3, 1]
+
+			Heuristics value: : 2
+	TA: [2]
+	TB: [1]
+	TC: [4, 3]
+
+			Heuristics value: : 6
+	TA: [2, 1]
+	TB: [3]
+	TC: [4]
+
+Movement number: 14
+Current state of Towers:
+TA: [2]
+TB: [1]
+TC: [4, 3]
+
+Possible Movements:
+			Heuristics value: : 2
+	TA: []
+	TB: [1]
+	TC: [4, 3, 2]
+
+			Heuristics value: : 6
+	TA: [2, 1]
+	TB: []
+	TC: [4, 3]
+
+			Heuristics value: : 4
+	TA: [2]
+	TB: []
+	TC: [4, 3, 1]
+
+Movement number: 15
+Current state of Towers:
+TA: []
+TB: [1]
+TC: [4, 3, 2]
+
+Possible Movements:
+			Heuristics value: : 4
+	TA: [1]
+	TB: []
+	TC: [4, 3, 2]
+
+			Heuristics value: : 2
+	TA: []
+	TB: []
+	TC: [4, 3, 2, 1]
+
+			Heuristics value: : 6
+	TA: [2]
+	TB: [1]
+	TC: [4, 3]
